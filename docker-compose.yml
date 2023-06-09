@@ -1,0 +1,16 @@
+version: '3.0'
+
+services:
+  postgres:
+      container_name: postgres
+      image: postgres:15
+      env_file:
+        - .env.local
+      environment:
+        - PG_DATA=/var/lib/postgresql/data
+      restart: always
+      ports:
+        - 5432:5432
+      volumes:
+        - $HOME/docker/volumes/next-shop-db/:/var/lib/postgresql/data
+  
