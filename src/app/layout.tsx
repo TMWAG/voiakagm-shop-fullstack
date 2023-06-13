@@ -13,14 +13,12 @@ export const metadata = {
 
 export default function RootLayout( props: {
   children: React.ReactNode;
-  modal: React.ReactNode;
 }) {
   return (
     <html lang="ru">
       <body className={SFProDisplay.className}>
         <Header />
         {props.children}
-        {props.modal}
       </body>
     </html>
   );
