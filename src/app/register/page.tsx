@@ -1,6 +1,6 @@
 'use client';
 import FormInput from "@/components/UI/FormInput";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface IRegisterDataItem {
   error: string;
@@ -40,19 +40,21 @@ export default function RegistrationPage(){
     value: '',
   });
 
+  const [disabled, setDisabled] = useState<boolean>(true);
+
   const [passFieldType, setPassFieldType] = useState<'text'| 'password'>('password');
   const [passVisibilityText, setPassVisibilityText] = useState<string>('Показать пароль');
 
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 1) {
-      setNameData({...nameData, error: 'Поле обязательно к заполнению!', value: e.target.value});
+      setNameData({error: 'Поле обязательно к заполнению!', valid: false, value: e.target.value});
       return;
     }
     setNameData({error: '', valid: true ,value: e.target.value});
   };
   const onSurnameChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 1) {
-      setSurnameData({...surnameData, error: 'Поле обязательно к заполнению!', value: e.target.value});
+      setSurnameData({error: 'Поле обязательно к заполнению!', valid: false, value: e.target.value});
       return;
     }
     setSurnameData({error: '', valid: true, value: e.target.value});
@@ -60,7 +62,7 @@ export default function RegistrationPage(){
   const onPhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     const phoneRegExp = /^(\+)?((\d{2,3}) ?\d|\d)(([ -]?\d)|( ?(\d{2,3}) ?)){5,12}\d$/;
     if (!phoneRegExp.test(e.target.value)) {
-      setPhoneData({...phoneData, error: 'Телефон имеет неверный формат', value: e.target.value});
+      setPhoneData({error: 'Телефон имеет неверный формат', valid: false, value: e.target.value});
       return;
     }
     setPhoneData({error: '', valid: true, value: e.target.value});
@@ -68,7 +70,7 @@ export default function RegistrationPage(){
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const emailRegExp = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/;
     if (!emailRegExp.test(e.target.value)) {
-      setEmailData({...phoneData, error: 'Email имеет неверный формат', value: e.target.value});
+      setEmailData({error: 'Email имеет неверный формат', valid: false, value: e.target.value});
       return;
     }
     setEmailData({error: '', valid: true, value: e.target.value});
@@ -76,14 +78,14 @@ export default function RegistrationPage(){
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const passwordRegExp = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
     if (!passwordRegExp.test(e.target.value)) {
-      setPasswordData({...passwordData, error: 'Пароль должен содержать больше 8 символов, включая буквы, цифры и спецсимволы', value: e.target.value});
+      setPasswordData({error: 'Пароль должен содержать больше 8 символов, включая буквы, цифры и спецсимволы', valid: false, value: e.target.value});
       return;
     }
     setPasswordData({error: '', valid: true, value: e.target.value});
   };
   const onPasswordConfirmationChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== passwordData.value) {
-      setPasswordConfirmationData({...passwordConfirmationData, error: 'Пароли не совпадают', value: e.target.value});
+      setPasswordConfirmationData({error: 'Пароли не совпадают', valid: false, value: e.target.value});
       return;
     }
     setPasswordConfirmationData({error: '', valid: true, value: e.target.value});
@@ -100,6 +102,36 @@ export default function RegistrationPage(){
       setPassVisibilityText('Показать пароль');
     }
   };
+
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    fetch(process.env.NEXT_PUBLIC_API_URL!.concat('auth/registration'), {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: nameData.value,
+        surname: surnameData.value,
+        phone: phoneData.value,
+        email: emailData.value,
+        password: passwordData.value,
+      }),
+    }).then((res) => {
+      return res.json();
+    }).then(data => console.log(data));
+  };
+  
+
+  useEffect(()=> {
+    const dataToCheck = [nameData, surnameData, phoneData, emailData, passwordData, passwordConfirmationData];
+    if (dataToCheck.every((d) => d.valid)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+    return () => {};
+  }, [nameData, surnameData, phoneData, emailData, passwordData, passwordConfirmationData]);
 
   return (
     <div className="border-2 border-green-400 w-96 flex flex-col items-center">
@@ -157,7 +189,19 @@ export default function RegistrationPage(){
         type={passFieldType}
         value={passwordConfirmationData.value}
       />
-      <button onClick={togglePasswordVisibility}>{passVisibilityText}</button>
+      <button
+        onClick={togglePasswordVisibility}
+        className={`${passFieldType === 'text' && 'bg-violet-500 text-white'} p-1 border-violet-500 border-2 rounded-sm w-36 mb-3`}
+      >
+        {passVisibilityText}
+      </button>
+      <button
+        onClick={onSubmit}
+        className="p-1 border-violet-500 border-2 rounded-sm w-48 active:bg-violet-500 active:text-white disabled:active:text-black disabled:border-zinc-600 disabled:cursor-not-allowed disabled:bg-zinc-400"
+        disabled={disabled}
+      >
+        Зарегистрироваться
+      </button>
     </div>
   );
 }
