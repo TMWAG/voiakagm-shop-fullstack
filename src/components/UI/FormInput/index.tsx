@@ -10,7 +10,7 @@ export interface IFormInputProps {
   value: string;
 }
 
-const FormInput = React.forwardRef(( props:IFormInputProps, ref?:LegacyRef<HTMLInputElement>) => {
+export default function FormInput(props:IFormInputProps){
   return(
     <div className="flex flex-col mb-4 items-center w-96">
       <label 
@@ -20,7 +20,6 @@ const FormInput = React.forwardRef(( props:IFormInputProps, ref?:LegacyRef<HTMLI
         {props.name}
       </label>
       <input
-        ref={ref}
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
@@ -37,8 +36,4 @@ const FormInput = React.forwardRef(( props:IFormInputProps, ref?:LegacyRef<HTMLI
       </label>
     </div>
   );
-});
-
-FormInput.displayName = 'FormInput';
-
-export default FormInput;
+};
