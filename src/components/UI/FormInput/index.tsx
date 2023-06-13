@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute, type ChangeEventHandler, LegacyRef } from "react";
+import React, { type HTMLInputTypeAttribute, type ChangeEventHandler } from "react";
 
 export interface IFormInputProps {
   error: string;
