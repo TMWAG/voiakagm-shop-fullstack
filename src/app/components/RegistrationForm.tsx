@@ -1,6 +1,7 @@
 'use client';
 
 import FormInput from "@/components/UI/FormInput";
+import useCheckValidity from "@/hooks/useCheckValidity";
 import { IRegisterDataItem } from "@/lib/types";
 import { useState, ChangeEvent, useEffect } from "react";
 
@@ -37,8 +38,6 @@ export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
     valid: false,
     value: '',
   });
-
-  const [disabled, setDisabled] = useState<boolean>(true);
 
   const [passFieldType, setPassFieldType] = useState<'text' | 'password'>('password');
   const [passVisibilityText, setPassVisibilityText] = useState<string>('Показать пароль');
@@ -105,7 +104,8 @@ export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    fetch('/api/auth/register', {
+    fetch(process.env.NEXT_PUBLIC_API_URL!.concat('auth/registration'), {
+      cache: 'no-cache',
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -115,24 +115,12 @@ export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
         email: emailData.value,
         password: passwordData.value,
       }),
-    }).then((res) => {
-      return res.json();
-    }).then(data => {
-      console.log(data);
-      setRegistrationResult(data);
-    });
+    })
+    .then(res => res.json())
+    .then(data => setRegistrationResult(data));
   };
 
-
-  useEffect(() => {
-    const dataToCheck = [nameData, surnameData, phoneData, emailData, passwordData, passwordConfirmationData];
-    if (dataToCheck.every((d) => d.valid)) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-    return () => { };
-  }, [nameData, surnameData, phoneData, emailData, passwordData, passwordConfirmationData]);
+  const isValid = useCheckValidity(nameData, surnameData, phoneData, emailData, passwordData, passwordConfirmationData);
 
   return (
     <div className={`${hidden&& 'hidden'} w-96 flex flex-col items-center`}>
@@ -199,7 +187,7 @@ export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
       <button
         onClick={onSubmit}
         className="p-1 border-violet-500 border-2 rounded-sm w-48 active:bg-violet-500 active:text-white disabled:active:text-black disabled:border-zinc-600 disabled:cursor-not-allowed disabled:bg-zinc-400"
-        disabled={disabled}
+        disabled={!isValid}
       >
         Зарегистрироваться
       </button>
