@@ -59,15 +59,16 @@ export default function LoginForm({ hidden }: { hidden?: boolean }) {
         email: emailData.value,
         password: passwordData.value,
       }),
-    }).then(res => res.json())
-      .then((data: IAuthObject) => {
-        setCookie('userId', data.id);
-        setCookie('userName', data.name);
-        setCookie('userRole', data.role);
-        setCookie('isUserActive', data.isActive);
-        setCookie('authToken', data.access_token);
-        router.refresh();
-      });
+    })
+    .then(res => res.json())
+    .then((data: IAuthObject) => {
+      setCookie('userId', data.id);
+      setCookie('userName', data.name);
+      setCookie('userRole', data.role);
+      setCookie('isUserActive', data.isActive);
+      setCookie('authToken', data.access_token);
+      router.refresh();
+    });
   };
   return (
     <div className={`${hidden && 'hidden'} w-96 flex flex-col items-center`}>
