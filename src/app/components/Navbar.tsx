@@ -1,5 +1,5 @@
 import { Links } from "./Links";
-import { UserPanel } from "./UserPanel/UserPanel";
+import { UserPanel } from "./UserPanel";
 import { navbarLinks } from "./navbarLinks";
 
 export const Navbar = () => {

@@ -1,7 +1,7 @@
 import person from '@/common/icons/person.svg';
 import Image from "next/image";
 import Hoverable from '@/components/UI/Hoverable';
-import AuthPopup from './AuthPopup/AuthPopup';
+import AuthPopup from './AuthPopup';
 import { cookies } from 'next/headers';
 import MiniProfile from './MiniProfile';
 
