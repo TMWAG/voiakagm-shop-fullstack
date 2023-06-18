@@ -2,11 +2,12 @@
 
 import FormInput from "@/components/UI/FormInput";
 import useCheckValidity from "@/hooks/useCheckValidity";
-import { IRegisterDataItem } from "@/lib/types";
+import { IAuthObject, IRegisterDataItem } from "@/lib/types";
+import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
-export default function LoginForm({hidden}: {hidden?: boolean}){
+export default function LoginForm({ hidden }: { hidden?: boolean }) {
   const router = useRouter();
   const [emailData, setEmailData] = useState<IRegisterDataItem>({
     error: '',
@@ -50,23 +51,26 @@ export default function LoginForm({hidden}: {hidden?: boolean}){
   const isValid = useCheckValidity(emailData, passwordData);
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    fetch('/api/auth/login', {
+    fetch(process.env.NEXT_PUBLIC_API_URL!.concat('auth/login'), {
+      cache: 'no-cache',
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: emailData.value,
         password: passwordData.value,
       }),
     }).then(res => res.json())
-      .then(data => {
-        console.log(data);
+      .then((data: IAuthObject) => {
+        setCookie('userId', data.id);
+        setCookie('userName', data.name);
+        setCookie('userRole', data.role);
+        setCookie('isUserActive', data.isActive);
+        setCookie('authToken', data.access_token);
         router.refresh();
       });
   };
   return (
-    <div className={`${hidden&& 'hidden'} w-96 flex flex-col items-center`}>
+    <div className={`${hidden && 'hidden'} w-96 flex flex-col items-center`}>
       <FormInput
         error={emailData.error}
         id="loginEmailInput"
