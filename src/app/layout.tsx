@@ -1,4 +1,4 @@
-import { Header } from './components/Header';
+import { Header } from './components/Header/Header';
 import './globals.css';
 import localFont from 'next/font/local';
 
@@ -16,7 +16,7 @@ export default function RootLayout( props: {
 }) {
   return (
     <html lang="ru">
-      <body className={SFProDisplay.className}>
+      <body className={`${SFProDisplay.className}`}>
         <Header />
         {props.children}
       </body>
