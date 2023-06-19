@@ -11,3 +11,9 @@ export interface IAuthObject {
   name: string;
   role: 'USER' | 'SUPERVISOR' | 'ADMIN';
 }
+
+export interface ICategoryItem {
+  id: number;
+  name: string;
+  picture: string | null;
+}
