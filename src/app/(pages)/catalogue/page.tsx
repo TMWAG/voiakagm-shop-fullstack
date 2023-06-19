@@ -4,4 +4,4 @@ export default function CataloguePage(){
       catalogue
     </div>
   );
-};
+}
