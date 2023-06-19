@@ -1,4 +1,6 @@
 import { Header } from './components/Header/Header';
+import Categories from './components/Header/Categories';
+import Greeting from './components/Header/Greeting';
 import './globals.css';
 import localFont from 'next/font/local';
 
@@ -16,9 +18,13 @@ export default function RootLayout( props: {
 }) {
   return (
     <html lang="ru">
-      <body className={`${SFProDisplay.className}`}>
+      <body className={`${SFProDisplay.className} flex flex-col `}>
         <Header />
-        {props.children}
+        <main className='flex flex-1 flex-wrap'>
+          <Greeting/>
+          <Categories/>
+          {props.children}
+        </main>
       </body>
     </html>
   );
