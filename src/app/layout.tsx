@@ -1,6 +1,6 @@
-import { Header } from './components/Header/Header';
-import Categories from './components/Header/Categories';
-import Greeting from './components/Header/Greeting';
+import { Header } from './components/layout/Header';
+import Categories from './components/layout/Categories';
+import Greeting from './components/layout/Greeting';
 import './globals.css';
 import localFont from 'next/font/local';
 
