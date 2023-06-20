@@ -6,7 +6,7 @@ export default function CategoryItem({ id, name, picture }: ICategoryItem) {
   return (
     <Link
       href={`catalogue/${id}`}
-      className="flex items-center border-b-[1px] last:border-b-0 h-[3.125rem] hover:shadow-inner"
+      className="flex items-center border-b-[1px] last:border-b-0 h-[3.125rem] hover:shadow-md shadow-none ease-in-out delay-0 duration-100"
     >
       <Image
         className='ml-3'
