@@ -4,7 +4,10 @@ import Link from "next/link";
 
 export default function CategoryItem({ id, name, picture }: ICategoryItem) {
   return (
-    <Link href={`catalogue/${id}`} className="flex items-center border-b-[1px] last:border-b-0 min-h-[3rem] h-[3.125rem] hover:shadow-inner">
+    <Link
+      href={`catalogue/${id}`}
+      className="flex items-center border-b-[1px] last:border-b-0 h-[3.125rem] hover:shadow-inner"
+    >
       <Image
         className='ml-3'
         alt={name}
