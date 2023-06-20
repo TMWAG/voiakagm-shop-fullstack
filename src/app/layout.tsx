@@ -20,7 +20,7 @@ export default function RootLayout( props: {
     <html lang="ru">
       <body className={`${SFProDisplay.className} flex flex-col `}>
         <Header />
-        <main className='flex flex-1 flex-wrap'>
+        <main className='flex flex-wrap gap-x-4'>
           <Greeting/>
           <Categories/>
           {props.children}
