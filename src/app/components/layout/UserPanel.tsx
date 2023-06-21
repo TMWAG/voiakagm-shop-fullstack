@@ -33,7 +33,7 @@ export const UserPanel = () => {
             width={22}
           />
         }
-        childrenClassName='end-0 top-0 rounded-2xl border-2 border-violet-500 bg-white'
+        childrenClassName='end-0 top-0 rounded border-[1px] bg-white'
       >
         {cookies().has('authToken')
           ?<MiniProfile/>
@@ -42,21 +42,25 @@ export const UserPanel = () => {
       </Hoverable>
       {cookies().has('authToken') &&
         <>
-        <Link href='/cart'>
-          <Image
-            src={cart}
-            alt=''
-          />
-        </Link>
-        <LogoutButton/>
-        <Link href='/favorites'>
-          <Image
-            alt=''
-            src={favorites}
-          />
-        </Link>
+          <Link href='/cart'>
+            <Image
+              src={cart}
+              alt=''
+            />
+          </Link>
+          <LogoutButton/>
+          <Link href='/favorites'>
+            <Image
+              alt=''
+              src={favorites}
+            />
+          </Link>
+          {cookies().get('userRole')?.value === 'ADMIN' &&
+            <Link href='/admin'>
+              admin
+            </Link>
+          }
         </>
-        
       }
       
     </div>
