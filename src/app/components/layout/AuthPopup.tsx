@@ -18,21 +18,21 @@ export default function AuthPopup(){
   };
   return (
     <div>
-      <nav>
+      <nav className="border-b-[1px]">
         <button
-          className={`${logFormHidden&& 'text-white bg-violet-500'} text-lg w-1/2 border-violet-500 border-b-2 rounded-tl-xl`}
+          className={`${logFormHidden&& 'text-white bg-violet-500'} text-lg w-1/2 rounded-tl`}
           onClick={onRegisterClick}
         >
           Регистрация
         </button>
         <button
-          className={`${regFormHidden&& 'text-white bg-violet-500'} text-lg w-1/2 border-violet-500 border-b-2 rounded-tr-xl`}
+          className={`${regFormHidden&& 'text-white bg-violet-500'} text-lg w-1/2 rounded-tr`}
           onClick={onLoginClick}
         >
           Вход
         </button>
       </nav>
-      <div className="p-4 h-[40rem] flex items-center">
+      <div className="p-4 min-h-[40rem] flex items-center">
         <RegistrationForm hidden={regFormHidden}/>
         <LoginForm hidden={logFormHidden}/>
       </div>
