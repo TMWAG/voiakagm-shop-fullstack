@@ -2,6 +2,7 @@ import ProductCard from "@/components/UI/ProductCard";
 import { IProductItem } from "@/lib/types";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import getProducts from "../lib/getProducts";
 
 const inter = Inter({
   subsets: ['cyrillic', 'latin'],
@@ -9,12 +10,7 @@ const inter = Inter({
 });
 
 export default async function MiniCatalogue(){
-  const products: IProductItem[] = await fetch(
-    process.env.NEXT_PUBLIC_API_URL!.concat('product/all?limit=11'),
-    {
-      method: 'GET',
-    }
-  ).then(res => res.json());
+  const products = await getProducts({limit: 11});
   return (
     <div
       className="mb-32"
