@@ -3,10 +3,16 @@ import ProductCard from "@/components/UI/ProductCard";
 
 export default async function CataloguePage(){
   const products = await getProducts({limit: 20, sort: "price-desc"});
-  // console.log(products);  
   return (
-    <div className="m-5 grid grid-cols-4 gap-2 w-2/3">
-      {products.map((p) => <ProductCard key={p.id} product={p}/>)}
+    <div className="mx-0 my-12 w-2/3">
+      <h1 className="text-2xl ml-1 font-medium">Каталог товаров</h1>
+      <span className="text-zinc-500 ml-1 mt-2 mb-4 block text-lg font-normal">
+        В каталоге на сайте вы можете подобрать различные ПК комплектующие и аксессуары. <br /> 
+        Железки могут быть как новыми, так и Б/У.
+      </span>
+      <div className="grid grid-cols-4 gap-2 ">
+        {products.map((p) => <ProductCard key={p.id} product={p}/>)}
+      </div>
     </div>
   );
 }
