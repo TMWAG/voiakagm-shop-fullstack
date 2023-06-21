@@ -1,6 +1,5 @@
 'use client';
-import useHover from "@/hooks/useHover";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 export default function Hoverable({
   item,
@@ -31,14 +30,4 @@ export default function Hoverable({
       }
     </div>
   );
-  /* const ref = useRef<HTMLDivElement | null>(null);
-  const hovering = useHover(ref);
-  return (
-    <div ref={ref}>
-      <div className={`relative`}>
-        {item}
-      </div>
-      
-    </div>
-  ); */
 }
