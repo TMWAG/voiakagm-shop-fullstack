@@ -21,8 +21,10 @@ export default function RootLayout( props: {
       <body className={`${SFProDisplay.className} flex flex-col `}>
         <Header />
         <main className='flex flex-wrap gap-x-4'>
-          <Greeting/>
-          <Categories/>
+          <aside>
+            <Greeting/>
+            <Categories/>
+          </aside>
           {props.children}
         </main>
       </body>
