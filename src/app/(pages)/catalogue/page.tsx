@@ -11,7 +11,7 @@ export default async function CataloguePage(){
         Железки могут быть как новыми, так и Б/У.
       </span>
       <div className="grid grid-cols-4 gap-2 ">
-        {products.map((p) => <ProductCard key={p.id} product={p}/>)}
+        {products.map((p) => <ProductCard key={p.id} subPath="product" product={p}/>)}
       </div>
     </div>
   );
