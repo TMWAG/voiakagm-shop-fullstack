@@ -23,12 +23,8 @@ export const navbarLinks: INavbarLink[] = [
     content: 'Услуги',
   },
   {
-    href: '/how_to_buy',
-    content: 'Как купить',
-  },
-  {
-    href: '/contacts',
-    content: 'Контакты',
+    href: '/info',
+    content: 'Инфо',
   },
   {
     href: '/recommendations',
