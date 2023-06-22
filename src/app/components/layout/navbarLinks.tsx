@@ -28,6 +28,6 @@ export const navbarLinks: INavbarLink[] = [
   },
   {
     href: '/recommendations',
-    content: 'Рекомендации',
+    content: 'Полезное',
   },
 ];
