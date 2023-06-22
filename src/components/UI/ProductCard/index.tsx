@@ -11,13 +11,15 @@ const inter = Inter({
 
 export default function ProductCard({
   product,
+  subPath,
 }: {
   product: IProductItem;
+  subPath: string;
 }){
   
   return (
     <Link
-      href={`/product/${product.id}`}
+      href={`/${subPath}/${product.id}`}
       className="border-[1px] h-96 bg-white flex flex-col justify-between p-3 hover:shadow-xl hover:scale-110 shadow-none ease-in-out delay-0 duration-100"
     >
       <Image
