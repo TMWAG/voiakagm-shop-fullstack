@@ -38,7 +38,7 @@ export default async function MiniCatalogue(){
       <div
         className="grid grid-cols-4 gap-[0.375rem]"
       >
-        {products.map((p) => <ProductCard key={p.id} product={p}/>)}
+        {products.map((p) => <ProductCard key={p.id} subPath="product" product={p}/>)}
         <Link
           href='/catalogue'
           className={
