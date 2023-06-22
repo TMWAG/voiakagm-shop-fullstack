@@ -14,7 +14,7 @@ import LogoutButton from './LogoutButton';
 export const UserPanel = () => {
   
   return (
-    <div className="flex items-center justify-around relative w-48">
+    <div className="flex items-center justify-around relative w-64">
       <Link
         href='/contacts'
         className='flex items-center text-violet-500'
