@@ -1,0 +1,187 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int       @default(autoincrement()) @id
+  name              String    @map("user_name")
+  surname           String    @map("user_surename")
+  phone             String    @map("user_phone") @unique
+  role              Role      @default(USER)
+  email             String    @map("user_email") @unique
+  photo             String?   @default("default.png")
+  password          String    @map("user_password")
+  vkLink            String?   @map("vk_link") @unique
+  tgLink            String?   @map("tg_link") @unique
+  verified          Boolean   @default(false) @map("is_active")
+  token             String    @default(uuid()) @unique
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  feedbacks         ProductFeedback[]
+  userAddresses     UserAddress[]
+  orders            Order[]
+  purchasedProducts PurchasedProducts[]
+  @@map("users")
+}
+
+enum Role {
+  USER
+  SUPERVISOR
+  ADMIN
+}
+
+model ProductFeedback {
+  id        Int     @default(autoincrement()) @id
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  text      String  @map("feedback_text")
+  rating    Int     @map("feedback_rating")
+  @@map("product_feegbacks")
+}
+
+model Product {
+  id                Int       @default(autoincrement()) @id
+  name              String    @map("product_name")
+  vendor            Vendor    @relation(fields: [vendorId], references: [id])
+  vendorId          Int
+  category          Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId        Int
+  price             Int
+  discount          Int?
+  description       String
+  amount            Int?
+  sold              Int       @default(0)
+  used              Boolean
+  feedbacks         ProductFeedback[]
+  pictures          ProductPicture[]
+  characteristics   ProductCharacteristic[]
+  orderedProducts   OrderedProduct[]
+  purchasedProducts PurchasedProducts[]
+  @@map("products")
+}
+
+model PurchasedProducts {
+  id        Int     @default(autoincrement()) @id
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  @@map("purchased_products")
+}
+
+model ProductPicture {
+  id          Int       @default(autoincrement()) @id
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId   Int
+  filename    String    @map("picture_filename")
+  @@map("product_pictures")
+}
+
+model Vendor {
+  id                Int       @default(autoincrement()) @id
+  name              String    @map("vendor_name")
+  products          Product[]
+  recommendations   Recommendation[]
+  @@map("vendors")
+}
+
+model Category {
+  id          Int         @default(autoincrement()) @id
+  name        String      @map("category_name")
+  picture     String?     @map("category_picture")
+  products    Product[]
+  parameters  ProductParameter[]
+  @@map("product_categories")
+}
+
+model ProductParameter {
+  id              Int       @default(autoincrement()) @id
+  name            String    @map("parameter_name")
+  category        Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId      Int
+  characteristics ProductCharacteristic[]
+  @@map("product_parameters")
+}
+
+model ProductCharacteristic {
+  id          Int       @default(autoincrement()) @id
+  parameter   ProductParameter @relation(fields: [parameterId], references: [id], onDelete: Cascade)
+  parameterId Int
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId   Int
+  value       String    @map("characteristic_value")
+  @@map("product_characteristics")
+}
+
+model UserAddress {
+  id          Int       @default(autoincrement()) @id
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  address     String
+  orders      Order[]
+  @@map("user_addresses")
+}
+
+model Recommendation {
+  id        Int     @default(autoincrement()) @id
+  product   String  @map("product_name")
+  filename  String  @map("recommendation_filename")
+  rating    Int     @map("recommendation_rating")
+  comment   String  @map("recommendation_comment")
+  vendor    Vendor  @relation(fields: [vendorId], references: [id])
+  vendorId  Int
+  @@map("recommendations")
+}
+
+model Order {
+  id                Int             @default(autoincrement()) @id
+  user              User            @relation(fields: [userId], references: [id])
+  userId            Int
+  userAddress       UserAddress?    @relation(fields: [userAddressId], references: [id])
+  userAddressId     Int?
+  createdAt         DateTime        @default(now())
+  status            OrderStatus     @default(NOT_APPROVED) @map("order_status")
+  trackNo           String?
+  deliveryService   DeliveryService? @relation(fields: [deliveryServiceId], references: [id])
+  deliveryServiceId Int?
+  crate             Boolean           @default(false)
+  orderedProducts   OrderedProduct[]
+  @@map("orders")
+}
+
+enum OrderStatus {
+  NOT_APPROVED
+  AWAITING_PAYMENT
+  PAID
+  COMPLETED
+  SENT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED 
+}
+
+model DeliveryService {
+  id      Int       @default(autoincrement()) @id
+  name    String    @map("delivery_service_name")
+  orders  Order[]
+  @@map("delivery_services")
+}
+
+model OrderedProduct {
+  id        Int       @default(autoincrement()) @id
+  order     Order     @relation(fields: [orderId], references: [id])
+  orderId   Int
+  product   Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  amount    Int
+  @@map("ordered_products")
+}
