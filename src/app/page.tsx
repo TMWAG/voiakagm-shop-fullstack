@@ -9,7 +9,7 @@ export default function Home() {
         src={promo_placeholder}
         alt=''
       />
-      <MiniCatalogue/>
+      {/* <MiniCatalogue/> */}
     </div>
   );
 }
