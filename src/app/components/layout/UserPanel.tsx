@@ -35,12 +35,12 @@ export const UserPanel = () => {
         }
         childrenClassName='end-0 top-0 rounded border-[1px] bg-white'
       >
-        {cookies().has('authToken')
+        {cookies().has('token')
           ?<MiniProfile/>
           :<AuthPopup/>
         }
       </Hoverable>
-      {cookies().has('authToken') &&
+      {cookies().has('token') &&
         <>
           <Link href='/cart'>
             <Image
