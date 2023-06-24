@@ -51,7 +51,7 @@ export default function LoginForm({ hidden }: { hidden?: boolean }) {
   const isValid = useCheckValidity(emailData, passwordData);
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    fetch(process.env.NEXT_PUBLIC_API_URL!.concat('auth/login'), {
+    fetch('api/auth/login', {
       cache: 'no-cache',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -62,12 +62,7 @@ export default function LoginForm({ hidden }: { hidden?: boolean }) {
     })
     .then(res => res.json())
     .then((data: IAuthObject) => {
-      setCookie('userId', data.id);
-      setCookie('userName', data.name);
-      setCookie('userRole', data.role);
-      setCookie('isUserActive', data.isActive);
-      setCookie('authToken', data.access_token);
-      router.refresh();
+      console.log(data);
     });
   };
   return (
