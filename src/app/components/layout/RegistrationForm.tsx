@@ -104,7 +104,7 @@ export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    fetch(process.env.NEXT_PUBLIC_API_URL!.concat('auth/registration'), {
+    fetch('api/auth/register', {
       cache: 'no-cache',
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -114,10 +114,11 @@ export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
         phone: phoneData.value,
         email: emailData.value,
         password: passwordData.value,
+        passwordConfirmation: passwordConfirmationData.value,
       }),
     })
     .then(res => res.json())
-    .then(data => setRegistrationResult(data));
+    .then(data => console.log(data));
   };
 
   const isValid = useCheckValidity(nameData, surnameData, phoneData, emailData, passwordData, passwordConfirmationData);
