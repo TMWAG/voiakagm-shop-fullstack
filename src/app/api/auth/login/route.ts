@@ -13,7 +13,6 @@ export async function POST(req: NextRequest){
     const user = await prisma.user.findUnique({
       where: { email: data.email },
     });
-    console.log('got info');
     
     if (!user) {
       return getErrorResponse(401, 'Указан неправильный Email');
@@ -21,15 +20,12 @@ export async function POST(req: NextRequest){
     if (!(await compare(data.password, user.password))) {
       return getErrorResponse(401, 'Указан неверный пароль');
     }
-    console.log('got user');
-    
     
     const JWT_EXPIRES_IN = getEnvVariable('JWT_EXPIRES_IN');
     const token = await signJWT(
       { sub: String(user.id) },
       { exp: `${JWT_EXPIRES_IN}m` }
     );
-    console.log('token done');
     
     const tokenMaxAge = parseInt(JWT_EXPIRES_IN) * 60;
     const cookieOptions = {
