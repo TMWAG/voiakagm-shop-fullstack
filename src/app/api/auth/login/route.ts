@@ -28,9 +28,27 @@ export async function POST(req: NextRequest){
     );
     
     const tokenMaxAge = parseInt(JWT_EXPIRES_IN) * 60;
-    const cookieOptions = {
+    const tokenCookieOptions = {
       name: 'token',
       value: token,
+      httpOnly: true,
+      path: '/',
+      secure: process.env.NODE_ENV !== 'development',
+      maxAge: tokenMaxAge,
+    };
+
+    const userNameCookieOptions = {
+      name: 'user-name',
+      value: user.name,
+      httpOnly: true,
+      path: '/',
+      secure: process.env.NODE_ENV !== 'development',
+      maxAge: tokenMaxAge,
+    };
+
+    const userRoleCookieOptions = {
+      name: 'user-role',
+      value: user.role,
       httpOnly: true,
       path: '/',
       secure: process.env.NODE_ENV !== 'development',
@@ -49,7 +67,9 @@ export async function POST(req: NextRequest){
     );
     
     await Promise.all([
-      response.cookies.set(cookieOptions),
+      response.cookies.set(tokenCookieOptions),
+      response.cookies.set(userNameCookieOptions),
+      response.cookies.set(userRoleCookieOptions),
       response.cookies.set({
         name: 'logged-in',
         value: 'true',
