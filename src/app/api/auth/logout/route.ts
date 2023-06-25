@@ -17,6 +17,16 @@ export async function GET(req: NextRequest) {
       value: '',
       maxAge: -1,
     }),
+    response.cookies.set({
+      name: 'user-name',
+      value: '',
+      maxAge: -1,
+    }),
+    response.cookies.set({
+      name: 'user-role',
+      value: '',
+      maxAge: -1,
+    }),
   ]);
 
   return response;
