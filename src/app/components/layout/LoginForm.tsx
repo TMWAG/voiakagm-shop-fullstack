@@ -60,10 +60,7 @@ export default function LoginForm({ hidden }: { hidden?: boolean }) {
         password: passwordData.value,
       }),
     })
-    .then(res => res.json())
-    .then((data: IAuthObject) => {
-      console.log(data);
-    });
+    .then(() => router.refresh());
   };
   return (
     <div className={`${hidden && 'hidden'} w-96 flex flex-col items-center`}>
