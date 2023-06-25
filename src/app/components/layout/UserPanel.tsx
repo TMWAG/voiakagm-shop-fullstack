@@ -55,7 +55,7 @@ export const UserPanel = () => {
               src={favorites}
             />
           </Link>
-          {cookies().get('userRole')?.value === 'ADMIN' &&
+          {cookies().get('user-role')?.value === 'ADMIN' &&
             <Link href='/admin'>
               admin
             </Link>
