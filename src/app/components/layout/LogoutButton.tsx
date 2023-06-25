@@ -1,6 +1,5 @@
 'use client';
 
-import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import logoutIcon from "@/common/icons/logout.svg";
 import Image from "next/image";
@@ -10,12 +9,8 @@ export default function LogoutButton(){
   const logout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
       e.preventDefault();
-      deleteCookie('userId');
-      deleteCookie('userName');
-      deleteCookie('userRole');
-      deleteCookie('isUserActive');
-      deleteCookie('authToken');
-      router.refresh();
+      fetch('/api/auth/logout')
+        .then(() =>router.refresh());
     };
   return (
     <button
