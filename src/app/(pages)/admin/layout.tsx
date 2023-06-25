@@ -7,7 +7,7 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }){
-  if(cookies().get('userRole')?.value !== 'ADMIN') {
+  if(cookies().get('user-role')?.value !== 'ADMIN') {
     redirect('/');
   }
   return (
