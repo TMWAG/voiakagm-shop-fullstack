@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { CreateCategorySchema } from "@/lib/validations/category.schema";
+import { CreateCategoryInput, CreateCategorySchema } from "@/lib/validations/category.schema";
 import { randomUUID } from "crypto";
 import { existsSync } from "fs";
 import fs from "fs/promises";
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest){
   const data = CreateCategorySchema.parse({
     name: body.get('name'),
     picture: body.get('picture'),
-  });
+  }) as CreateCategoryInput;
 
   
   const destinationDirectory = path.join(
