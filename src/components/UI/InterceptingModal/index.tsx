@@ -8,7 +8,7 @@ interface IModalLinks {
   content: string;
 }
 
-export default function Modal({
+export default function InterceptingModal({
   children,
   links,
 }: {
