@@ -23,7 +23,7 @@ export default function RootLayout( props: {
         <main className='flex flex-wrap gap-x-4'>
           <aside>
             <Greeting/>
-            {/* <Categories/> */}
+            <Categories/>
           </aside>
           {props.children}
         </main>
