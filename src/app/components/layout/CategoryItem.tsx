@@ -9,12 +9,9 @@ export default function CategoryItem({ id, name, picture }: ICategoryItem) {
       className="flex items-center border-b-[1px] last:border-b-0 h-[3.125rem] hover:shadow-md shadow-none ease-in-out delay-0 duration-100"
     >
       <Image
-        className='ml-3'
+        className='mx-3'
         alt={name}
-        src={picture
-          ?process.env.NEXT_PUBLIC_PICTURES_URL!.concat(`category/${picture}`)
-          :''
-        }
+        src={`/categories/${picture}`}
         width={32}
         height={32}
       />
