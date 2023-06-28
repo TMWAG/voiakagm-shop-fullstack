@@ -1,6 +1,6 @@
 import { getErrorResponse } from "@/lib/helpers";
 import { prisma } from "@/lib/prisma";
-import { CreateCategoryInput, CreateCategorySchema, UpdateCategoryInput, UpdateCategorySchema } from "@/lib/validations/category.schema";
+import { CreateCategoryInput, CreateCategorySchema, DeleteCategoryInput, DeleteCategorySchema, UpdateCategoryInput, UpdateCategorySchema } from "@/lib/validations/category.schema";
 import { randomUUID } from "crypto";
 import { existsSync } from "fs";
 import fs from "fs/promises";
@@ -98,4 +98,27 @@ export async function PUT(req: NextRequest) {
     }
     return getErrorResponse(500, error.message);
   }
+}
+
+export async function DELETE(req: NextRequest){
+  try {
+    const { searchParams } = new URL(req.url);
+    const data = DeleteCategorySchema.parse({
+      id: Number(searchParams.get('id')),
+      categoryName: searchParams.get('confirmation'),
+    });
+    await prisma.category.delete({ where: { id: data.id } });
+    return new NextResponse(JSON.stringify({
+      status: 'success',
+    }),{
+      status: 200,
+      headers: { 'Content-Type': 'application/json'},
+    });
+  } catch (error: any) {
+    if (error instanceof ZodError) {
+      return getErrorResponse(400, 'Данные имеют неверный формат');
+    }
+    return getErrorResponse(500, error.message);
+  }
+
 }
