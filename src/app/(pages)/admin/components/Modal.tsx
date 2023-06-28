@@ -6,9 +6,9 @@ export default function Modal({
   buttonText,
   children,
 }: {
-  buttonText: string; 
+  buttonText: string;
   children: React.ReactNode;
-}){
+}) {
   const [hidden, setHidden] = useState<boolean>(true);
   const overlay = useRef<HTMLDivElement | null>(null);
   return (
@@ -27,29 +27,30 @@ export default function Modal({
       >
         {buttonText}
       </button>
-      <div
-        ref={overlay}
-        hidden={hidden}
-        className="
-          text-black fixed top-0 left-0
-          z-10 w-screen h-screen bg-black/25
-        "
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-          if (e.target === overlay.current) setHidden(!hidden);
-        }}
-      >
+      {!hidden &&
         <div
+          ref={overlay}
           className="
-            absolute flex flex-col
-            items-center top-2/4 left-2/4
-            h-2/3 w-2/5 -translate-x-2/4
-            -translate-y-2/4 rounded border-[1px]
-            bg-white
+            text-black fixed top-0 left-0
+            z-10 w-screen h-screen bg-black/25
           "
+          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            if (e.target === overlay.current) setHidden(!hidden);
+          }}
         >
-          {children}
+          <div
+            className="
+              absolute flex flex-col
+              items-center top-2/4 left-2/4
+              h-2/3 w-2/5 -translate-x-2/4
+              -translate-y-2/4 rounded border-[1px]
+              bg-white
+            "
+          >
+            {children}
+          </div>
         </div>
-      </div>
+      }
     </>
   );
 }
