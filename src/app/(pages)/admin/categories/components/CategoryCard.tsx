@@ -2,6 +2,7 @@ import { ICategoryItem } from "@/lib/types";
 import Image from "next/image";
 import EditButton from "./EditButton";
 import AddCategoryForm from "./AddCategoryForm";
+import DeleteButton from "./DeleteButton";
 
 export default async function CategoryCard({
   category,
@@ -33,15 +34,8 @@ export default async function CategoryCard({
           flex
         "
       >
-        <EditButton entityId={category.id} entityName="category" initialValue={category.name}/>
-        <button
-          className="
-            bg-zinc-300 grow p-2 w-1/2 hover:bg-red-400 
-            ease-in-out delay-0 duration-100
-          "
-        >
-          Удалить
-        </button>
+        <EditButton entityId={category.id} initialValue={category.name}/>
+        <DeleteButton categoryName={category.name} id={category.id}/>
       </div>
     </div>
   );
