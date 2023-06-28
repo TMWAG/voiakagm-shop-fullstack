@@ -90,6 +90,7 @@ model ProductPicture {
 model Vendor {
   id                Int       @default(autoincrement()) @id
   name              String    @map("vendor_name")
+  picture           String    @map("vandor_picture")
   products          Product[]
   recommendations   Recommendation[]
   @@map("vendors")
