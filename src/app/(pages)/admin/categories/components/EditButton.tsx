@@ -8,7 +8,6 @@ export default function EditButton({
   entityId,
 }: {
   entityId: number;
-  entityName: string;
   initialValue: string;
 }) {
   const [hidden, setHidden] = useState<boolean>(true);
@@ -65,31 +64,30 @@ export default function EditButton({
         Изменить
       </button>
       {!hidden &&
-
         <div
           ref={editOverlay}
           hidden={hidden}
           className="
-          text-black fixed top-0 left-0
-          z-10 w-screen h-screen bg-black/25
-        "
+            text-black fixed top-0 left-0
+            z-10 w-screen h-screen bg-black/25
+          "
           onClick={onOverlayClick}
         >
           <div
             className="
-            absolute flex flex-col
-            items-center top-2/4 left-2/4
-            h-2/3 w-2/5 -translate-x-2/4
-            -translate-y-2/4 rounded border-[1px]
-            bg-white
-          "
+              absolute flex flex-col
+              items-center top-2/4 left-2/4
+              h-2/3 w-2/5 -translate-x-2/4
+              -translate-y-2/4 rounded border-[1px]
+              bg-white
+            "
           >
             <form
               onSubmit={onSubmit}
               className="
-              flex flex-col items-center justify-center
-              w-full h-full
-            "
+                flex flex-col items-center justify-center
+                w-full h-full
+              "
             >
               <div className="flex flex-col w-2/5 my-2">
                 <label htmlFor="categoryName">
@@ -100,9 +98,9 @@ export default function EditButton({
                   name="newCategoryName"
                   id="categoryName"
                   className="
-                  border-2 rounded p-1 focus:border-violet-400
-                  outline-none
-                "
+                    border-2 rounded p-1 focus:border-violet-400
+                    outline-none
+                  "
                   value={newCategoryName}
                   onChange={onCategoryNameChange}
                 />
@@ -111,11 +109,11 @@ export default function EditButton({
                 <label htmlFor="categoryPicture">Изображение категории</label>
                 <input
                   className="
-                block text-sm text-center w-full
-                file:bg-zinc-200 file:border-0
-                file:rounded file:py-2 file:px-4
-                file:hover:bg-zinc-300 file:w-32
-                "
+                    block text-sm text-center w-full
+                    file:bg-zinc-200 file:border-0
+                    file:rounded file:py-2 file:px-4
+                    file:hover:bg-zinc-300 file:w-32
+                  "
                   type="file"
                   name="newPicture"
                   id="categoryPicture"
@@ -124,8 +122,8 @@ export default function EditButton({
               </div>
               <input
                 className="
-                w-2/5 border-2 rounded hover:border-violet-400
-              "
+                  w-2/5 border-2 rounded hover:border-violet-400
+                "
                 type="submit"
                 value="Изменить категорию"
               />
