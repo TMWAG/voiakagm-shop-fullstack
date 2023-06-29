@@ -1,7 +1,6 @@
 import { ICategoryItem } from "@/lib/types";
 import Image from "next/image";
 import EditButton from "./EditButton";
-import AddCategoryForm from "./AddCategoryForm";
 import DeleteButton from "./DeleteButton";
 
 export default async function CategoryCard({
