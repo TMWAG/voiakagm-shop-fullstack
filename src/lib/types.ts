@@ -18,6 +18,12 @@ export interface ICategoryItem {
   picture: string | null;
 }
 
+export interface IVendorItem {
+  id: number;
+  name: string;
+  picture: string | null;
+}
+
 export interface IProductItem {
   id: number;
   name: string;
