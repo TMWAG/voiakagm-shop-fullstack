@@ -1,15 +1,19 @@
 import { getErrorResponse } from "@/lib/helpers";
 import { prisma } from "@/lib/prisma";
 import { CreateCategoryInput, CreateCategorySchema, DeleteCategoryInput, DeleteCategorySchema, UpdateCategoryInput, UpdateCategorySchema } from "@/lib/validations/category.schema";
+import { Role } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { existsSync } from "fs";
 import fs from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { ZodError } from "zod";
+import { getUserRole } from "../../_lib/utils";
 
 export async function POST(req: NextRequest){
   try {
+    if (await getUserRole(req) !== Role.ADMIN)
+      return getErrorResponse(403, 'Недостаточный уровень привилегий');
     const body = await req.formData();
     const data = CreateCategorySchema.parse({
       name: body.get('name'),
@@ -53,6 +57,8 @@ export async function POST(req: NextRequest){
 
 export async function PUT(req: NextRequest) {
   try {
+    if (await getUserRole(req) !== Role.ADMIN)
+      return getErrorResponse(403, 'Недостаточный уровень привилегий');
     const body = await req.formData();
     const data = UpdateCategorySchema.parse({
       id: Number(body.get('id')),
@@ -102,6 +108,8 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest){
   try {
+    if (await getUserRole(req) !== Role.ADMIN)
+      return getErrorResponse(403, 'Недостаточный уровень привилегий');
     const { searchParams } = new URL(req.url);
     const data = DeleteCategorySchema.parse({
       id: Number(searchParams.get('id')),
