@@ -1,7 +1,7 @@
 import { ICategoryItem } from "@/lib/types";
 import Image from "next/image";
-import EditButton from "./EditButton";
-import DeleteButton from "./DeleteButton";
+import EditButtonWithModal from "../../components/EditButtonWithModal";
+import DeleteButtonWithModal from "../../components/DeleteButtonWithModal";
 
 export default async function CategoryCard({
   category,
@@ -33,8 +33,18 @@ export default async function CategoryCard({
           flex
         "
       >
-        <EditButton entityId={category.id} initialValue={category.name}/>
-        <DeleteButton categoryName={category.name} id={category.id}/>
+        <EditButtonWithModal
+          entityId={category.id}
+          initialValue={category.name}
+          path="categories"
+        />
+        <DeleteButtonWithModal
+          entityId={category.id}
+          entityName={category.name}
+          path="categories"
+        />
+        {/* <EditButton entityId={category.id} initialValue={category.name}/>
+        <DeleteButton categoryName={category.name} id={category.id}/> */}
       </div>
     </div>
   );
