@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import AddVendorForm from "./components/AddVendorForm";
-import VendorCard from "./components/VendorCard";
+import EntityCard from "../components/EntityCard";
 
 export default async function VendorsPage(){
   const vendors = await prisma.vendor.findMany({
@@ -9,7 +9,7 @@ export default async function VendorsPage(){
   return (
     <div className="grid grid-cols-6 gap-1 mb-12">
       <AddVendorForm/>
-      {vendors.map((v) => <VendorCard vendor={v} key={v.id} />)}
+      {vendors.map((v) => <EntityCard entity={v} entityType="vendors" key={v.id} />)}
     </div>
   );
 }
