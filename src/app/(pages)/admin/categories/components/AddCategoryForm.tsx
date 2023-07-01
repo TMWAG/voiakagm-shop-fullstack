@@ -37,6 +37,8 @@ export default function AddCategoryForm() {
       console.log(await res.json());
       router.refresh();
       setHidden(true);
+      setCategoryName('');
+      setCategoryPicture(undefined);
     } catch (error: any) {
       console.log(error.message);
     }
