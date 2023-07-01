@@ -24,7 +24,10 @@ export default function DeleteButtonWithModal({
   const overlay = useRef<HTMLDivElement | null>(null);
 
   const onOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.target === overlay.current) setHidden(true);
+    if (e.target === overlay.current) {
+      setHidden(true);
+      setConfirmation('');
+    };
   };
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -49,12 +52,13 @@ export default function DeleteButtonWithModal({
         { method: 'DELETE' },
       );
       if (!res.ok) throw new Error(await res.text());
+      setHidden(true);
+      setDisabled(true);
+      setConfirmation('');
+      router.refresh();
     } catch (error: any) {
       console.log(error.message);
     }
-    setHidden(true);
-    setDisabled(true);
-    router.refresh();
   };
   return (
     <Modal
