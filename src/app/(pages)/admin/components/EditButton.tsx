@@ -9,7 +9,7 @@ export default function EditButton({
     <button
       onClick={onClick}
       className="
-        bg-zinc-300 grow p-2 w-1/2 hover:bg-yellow-400
+        bg-zinc-300 p-2 w-1/2 hover:bg-yellow-400
         ease-in-out delay-0 duration-100
       "
     >
