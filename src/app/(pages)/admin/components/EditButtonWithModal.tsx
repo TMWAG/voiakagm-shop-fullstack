@@ -24,7 +24,6 @@ export default function EditButtonWithModal({
   const overlay = useRef<HTMLDivElement | null>(null);
   
   const onOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log(overlay.current);
     if (e.target === overlay.current) setHidden(true);
   };
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
