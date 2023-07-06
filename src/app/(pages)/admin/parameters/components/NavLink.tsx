@@ -6,15 +6,17 @@ import { usePathname } from "next/navigation";
 export default function NavLink({
   id,
   name,
+  subsegment,
 }: {
   id: number;
   name: string;
+  subsegment: string;
 }) {
   const pathname = usePathname();
   const isActive = pathname.endsWith(String(id));
   return (
     <Link
-      href={`/admin/parameters/${id}`}
+      href={`/admin/${subsegment}/${id}`}
       className={`
         ${isActive
           ? 'bg-violet-500 text-white'
