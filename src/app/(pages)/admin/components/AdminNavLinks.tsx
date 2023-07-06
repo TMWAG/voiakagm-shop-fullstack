@@ -37,7 +37,7 @@ export default function AdminNavLinks() {
   return (
     <nav className="grid grid-flow-col-dense justify-between mb-2">
       {links.map((l) => {
-        const isActive = pathname.endsWith(l.href);
+        const isActive = pathname.includes(l.href);
         return (
           <Link
           key={l.href}
