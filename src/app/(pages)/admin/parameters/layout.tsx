@@ -16,7 +16,7 @@ export default async function AdminParametersLayout({
           grid grid-flow-col-dense grid-cols-7 gap-2
         "
       >
-        {categories.map((c) => <NavLink id={c.id} name={c.name} key={c.id}/>)}
+        {categories.map((c) => <NavLink subsegment="parameters" id={c.id} name={c.name} key={c.id}/>)}
       </nav>
       {children}
     </div>
