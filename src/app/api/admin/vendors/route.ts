@@ -115,7 +115,13 @@ export async function DELETE(req: NextRequest){
       id: Number(searchParams.get('id')),
       vendorName: searchParams.get('confirmation'),
     });
-    await prisma.vendor.delete({ where: { id: data.id } });
+    const vendor = await prisma.vendor.delete({ where: { id: data.id } });
+    if (vendor.picture !== null){
+      const destinationDirectory = path.join(
+        process.cwd(), 'public', 'vendors'
+      );
+      fs.rm(path.join(destinationDirectory, vendor.picture));
+    }
     return new NextResponse(JSON.stringify({
       status: 'success',
     }),{
