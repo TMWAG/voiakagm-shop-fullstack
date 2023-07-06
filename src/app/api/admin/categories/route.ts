@@ -115,7 +115,13 @@ export async function DELETE(req: NextRequest){
       id: Number(searchParams.get('id')),
       categoryName: searchParams.get('confirmation'),
     });
-    await prisma.category.delete({ where: { id: data.id } });
+    const category = await prisma.category.delete({ where: { id: data.id } });
+    if (category.picture !== null) {
+      const destinationDirectory = path.join(
+        process.cwd(), 'public', 'categories'
+      );
+      fs.rm(path.join(destinationDirectory, category.picture));
+    }
     return new NextResponse(JSON.stringify({
       status: 'success',
     }),{
