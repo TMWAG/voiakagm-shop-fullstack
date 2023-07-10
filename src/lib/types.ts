@@ -1,7 +1,7 @@
 export interface IValidateableTextInput {
   error: string;
   valid: boolean;
-  value: string;
+  value: any;
 };
 
 export interface ICategoryItem {
