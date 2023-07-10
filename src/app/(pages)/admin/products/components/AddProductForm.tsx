@@ -1,3 +1,4 @@
+import useCheckValidity from "@/hooks/useCheckValidity";
 import { IValidateableTextInput } from "@/lib/types";
 import { Prisma } from "@prisma/client";
 
@@ -5,7 +6,7 @@ export default function AddProductForm({
   name,
   onNameChange,
   onVendorChange,
-  vendorId,
+  vendor,
   vendors,
   price,
   onPriceChange,
@@ -22,7 +23,7 @@ export default function AddProductForm({
   name: IValidateableTextInput;
   onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   vendors: Prisma.VendorGetPayload<{}>[];
-  vendorId: number | undefined;
+  vendor: IValidateableTextInput;
   onVendorChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   price: IValidateableTextInput;
   onPriceChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,6 +37,7 @@ export default function AddProductForm({
   onUsedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }){
+  const isValid = useCheckValidity(name, price, discount, description, amount, vendor);
   return (
     <div
       className="
@@ -61,9 +63,8 @@ export default function AddProductForm({
         <label className="flex flex-col">
           Производитель
           <select
-            value={vendorId}
+            value={vendor.value}
             onChange={onVendorChange}
-            defaultValue={'----'}
             className="
               border-2 rounded p-1 focus:border-violet-400
               outline-none bg-white
@@ -138,9 +139,12 @@ export default function AddProductForm({
         </label>
         <button
           className="
-            border-2 rounded hover:border-violet-400 py-1 mb-2
+            border-2 rounded  py-1 mb-2
+            hover:border-violet-400
+            disabled:bg-zinc-400
           "
           onClick={onSubmit}
+          disabled={!isValid}
         >
           Добавить товар
         </button>
