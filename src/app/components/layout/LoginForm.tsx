@@ -2,19 +2,18 @@
 
 import FormInput from "@/components/UI/FormInput";
 import useCheckValidity from "@/hooks/useCheckValidity";
-import { IAuthObject, IRegisterDataItem } from "@/lib/types";
-import { setCookie } from "cookies-next";
+import { IValidateableTextInput } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function LoginForm({ hidden }: { hidden?: boolean }) {
   const router = useRouter();
-  const [emailData, setEmailData] = useState<IRegisterDataItem>({
+  const [emailData, setEmailData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
   });
-  const [passwordData, setPasswordData] = useState<IRegisterDataItem>({
+  const [passwordData, setPasswordData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
