@@ -1,8 +1,8 @@
-import { IProductItem } from "@/lib/types";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import placeholder from "../../../../public/placeholder.png";
+import { Prisma } from "@prisma/client";
 
 const inter = Inter({
   subsets: ['cyrillic', 'latin'],
@@ -13,7 +13,7 @@ export default function ProductCard({
   product,
   subPath,
 }: {
-  product: IProductItem;
+  product: Prisma.ProductGetPayload<{ include: {pictures: { select: { filename: true }}}}>;
   subPath: string;
 }){
   
