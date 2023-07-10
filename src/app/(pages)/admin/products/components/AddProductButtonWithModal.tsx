@@ -42,9 +42,13 @@ export default function AddProductButtonWithModal({
     valid: false,
     value: '',
   });
+  const [vendor, setVendor] = useState<IValidateableTextInput>({
+    error: '',
+    valid: false,
+    value: '----',
+  });
   const [used, setUsed] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
-  const [vendor, setVendor] = useState<number>();
 
   const overlay = useRef<HTMLDivElement | null>(null);
 
@@ -72,7 +76,11 @@ export default function AddProductButtonWithModal({
     }
   };
   const onVendorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setVendor(Number(e.target.value));
+    setVendor({
+      error: '',
+      valid: true,
+      value: Number(e.target.value),
+    });
   };
   const onPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (Number.isNaN(Number(e.target.value))){
@@ -182,7 +190,7 @@ export default function AddProductButtonWithModal({
           name={name}
           onNameChange={onNameChange}
           onVendorChange={onVendorChange}
-          vendorId={vendor}
+          vendor={vendor}
           vendors={vendors}
           onPriceChange={onPriceChange}
           price={price}
