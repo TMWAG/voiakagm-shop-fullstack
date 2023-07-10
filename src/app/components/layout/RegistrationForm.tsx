@@ -2,38 +2,38 @@
 
 import FormInput from "@/components/UI/FormInput";
 import useCheckValidity from "@/hooks/useCheckValidity";
-import { IRegisterDataItem } from "@/lib/types";
-import { useState, ChangeEvent, useEffect } from "react";
+import { IValidateableTextInput } from "@/lib/types";
+import { useState, ChangeEvent } from "react";
 
 
 
 export default function RegistrationForm({ hidden }: {hidden?: boolean}) {
-  const [nameData, setNameData] = useState<IRegisterDataItem>({
+  const [nameData, setNameData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
   });
-  const [surnameData, setSurnameData] = useState<IRegisterDataItem>({
+  const [surnameData, setSurnameData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
   });
-  const [phoneData, setPhoneData] = useState<IRegisterDataItem>({
+  const [phoneData, setPhoneData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
   });
-  const [emailData, setEmailData] = useState<IRegisterDataItem>({
+  const [emailData, setEmailData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
   });
-  const [passwordData, setPasswordData] = useState<IRegisterDataItem>({
+  const [passwordData, setPasswordData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
   });
-  const [passwordConfirmationData, setPasswordConfirmationData] = useState<IRegisterDataItem>({
+  const [passwordConfirmationData, setPasswordConfirmationData] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
     value: '',
