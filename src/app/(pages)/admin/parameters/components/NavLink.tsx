@@ -13,7 +13,7 @@ export default function NavLink({
   subsegment: string;
 }) {
   const pathname = usePathname();
-  const isActive = pathname.endsWith(String(id));
+  const isActive = Number(pathname.split('/')[3]) === id;
   return (
     <Link
       href={`/admin/${subsegment}/${id}`}
