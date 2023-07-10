@@ -1,7 +1,7 @@
-import { IRegisterDataItem } from "@/lib/types";
+import { IValidateableTextInput } from "@/lib/types";
 import { useEffect, useState } from "react";
 
-export default function useCheckValidity(...dataToCheck: IRegisterDataItem[]){
+export default function useCheckValidity(...dataToCheck: IValidateableTextInput[]){
   const [isValid, setIsValid] = useState<boolean>(false);
   useEffect(() => {
     if (dataToCheck.every((d) => d.valid)) setIsValid(true);
