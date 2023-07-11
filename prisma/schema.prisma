@@ -59,7 +59,7 @@ model Product {
   price             Int
   discount          Int?
   description       String
-  amount            Int?
+  amount            Int
   sold              Int       @default(0)
   used              Boolean
   feedbacks         ProductFeedback[]
