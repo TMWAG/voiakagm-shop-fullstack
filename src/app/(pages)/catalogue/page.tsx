@@ -1,6 +1,11 @@
 import ProductCard from "@/components/UI/ProductCard";
+import { prisma } from "@/lib/prisma";
 
 export default async function CataloguePage(){
+  const products = await prisma.product.findMany({
+    orderBy: { id: "asc" },
+    include: { pictures: { select: { filename: true } } },
+  });
   return (
     <div className="mx-0 my-12 w-2/3">
       <h1 className="text-2xl ml-1 font-medium">Каталог товаров</h1>
@@ -9,7 +14,7 @@ export default async function CataloguePage(){
         Железки могут быть как новыми, так и Б/У.
       </span>
       <div className="grid grid-cols-4 gap-2 ">
-        {/* {products.map((p) => <ProductCard key={p.id} subPath="product" product={p}/>)} */}
+        {products.map((p) => <ProductCard key={p.id} subPath="product" product={p}/>)}
       </div>
     </div>
   );
