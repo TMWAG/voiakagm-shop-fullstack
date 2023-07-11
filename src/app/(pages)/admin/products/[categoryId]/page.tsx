@@ -13,7 +13,7 @@ export default async function ProductAdminPage({
   });
   const vendors = await prisma.vendor.findMany();
   return (
-    <div className="grid grid-cols-6 gap-2 mb-12">
+    <div className="grid grid-cols-6 gap-2 mb-12 mt-2">
       <AddProductButtonWithModal
         vendors={vendors}
         categoryId={params.categoryId}
