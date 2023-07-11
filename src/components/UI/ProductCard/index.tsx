@@ -20,9 +20,16 @@ export default function ProductCard({
   return (
     <Link
       href={`/${subPath}/${product.id}`}
-      className="border h-72 bg-white flex flex-col justify-between p-3 hover:shadow-xl hover:scale-110 shadow-none ease-in-out delay-0 duration-100"
+      className="
+        border bg-white
+        flex flex-col justify-between
+        p-3 hover:shadow-xl hover:scale-110 
+        shadow-none ease-in-out 
+        delay-0 duration-100
+      "
     >
       <Image
+        className="self-center"
         alt={product.name}
         src={product.pictures.length
           ? process.env.NEXT_PUBLIC_PICTURES_URL!.concat(`products/${product.id}/${product.pictures[0].filename}`)
