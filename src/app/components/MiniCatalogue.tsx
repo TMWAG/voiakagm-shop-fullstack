@@ -1,8 +1,7 @@
 import ProductCard from "@/components/UI/ProductCard";
-import { IProductItem } from "@/lib/types";
+import { prisma } from "@/lib/prisma";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import getProducts from "../lib/getProducts";
 
 const inter = Inter({
   subsets: ['cyrillic', 'latin'],
@@ -10,7 +9,10 @@ const inter = Inter({
 });
 
 export default async function MiniCatalogue(){
-  const products = await getProducts({limit: 11});
+  const products = await prisma.product.findMany({
+    orderBy: { id: "asc" },
+    include: { pictures: { select: { filename: true } } },
+  });
   return (
     <div
       className="mb-32"
