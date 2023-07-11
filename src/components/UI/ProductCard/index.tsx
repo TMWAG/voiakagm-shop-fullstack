@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import placeholder from "../../../../public/placeholder.png";
+import no_picture from "../../../../public/no_picture.png";
 import { Prisma } from "@prisma/client";
 
 const inter = Inter({
@@ -20,17 +20,16 @@ export default function ProductCard({
   return (
     <Link
       href={`/${subPath}/${product.id}`}
-      className="border-[1px] h-96 bg-white flex flex-col justify-between p-3 hover:shadow-xl hover:scale-110 shadow-none ease-in-out delay-0 duration-100"
+      className="border h-72 bg-white flex flex-col justify-between p-3 hover:shadow-xl hover:scale-110 shadow-none ease-in-out delay-0 duration-100"
     >
       <Image
-        className="self-center"
         alt={product.name}
         src={product.pictures.length
           ? process.env.NEXT_PUBLIC_PICTURES_URL!.concat(`products/${product.id}/${product.pictures[0].filename}`)
-          : placeholder
+          : no_picture
         }
-        width={223}
-        height={283}
+        width={256}
+        height={256}
       />
       <div className="flex flex-col">
         <span className={`${inter.className} font-normal`}>{(product.price/100).toLocaleString('ru', {style: 'currency', currency: 'RUB'})}</span>
