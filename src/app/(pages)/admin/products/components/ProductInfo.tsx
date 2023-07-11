@@ -1,5 +1,5 @@
 import { type Prisma } from "@prisma/client";
-import ProductInfoItem from "./PriductInfoItem";
+import ProductInfoItem from "./ProductInfoItem";
 
 export default function ProductInfo({
   product,
