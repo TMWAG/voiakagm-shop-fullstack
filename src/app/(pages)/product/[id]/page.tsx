@@ -1,15 +1,14 @@
-import { IProductInfo } from "@/lib/types";
+import { prisma } from "@/lib/prisma";
 
 export default async function ProductPage({
   params,
 }: {
   params: { id: number };
 }){
-  const product: IProductInfo = await fetch(
-    process.env.NEXT_PUBLIC_API_URL!.concat(`product/id/${params.id}`),
-    { method: 'GET' },
-  ).then(res => res.json());
+  const product = await prisma.product.findUniqueOrThrow({
+    where: { id: Number(params.id) },
+  });
   return (
-    <div>product {product.name}</div>
+    <div>{product.name}</div>
   );
 }
