@@ -25,7 +25,7 @@ export default function ProductCard({
         flex flex-col justify-between
         p-3 hover:shadow-xl hover:scale-110 
         shadow-none ease-in-out 
-        delay-0 duration-100
+        delay-0 duration-100 
       "
     >
       <Image
@@ -40,7 +40,7 @@ export default function ProductCard({
       />
       <div className="flex flex-col">
         <span className={`${inter.className} font-normal`}>{(product.price/100).toLocaleString('ru', {style: 'currency', currency: 'RUB'})}</span>
-        <span className={`${inter.className} font-light text-zinc-600`} >{product.name}</span>
+        <span className={`${inter.className} font-light text-zinc-600  max-w-[18rem]`} >{product.name}</span>
         <span className={`${inter.className} font-light ${product.amount? 'text-lime-600' : 'text-yellow-600'}`}>
           &#8226;
           {product.amount
