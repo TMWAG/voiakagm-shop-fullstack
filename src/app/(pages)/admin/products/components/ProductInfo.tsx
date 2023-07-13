@@ -1,7 +1,9 @@
 import { type Prisma } from "@prisma/client";
 import ProductInfoItem from "./ProductInfoItem";
+import EditProductButtonWithModal from "./EditProductButtonWithModal";
+import { prisma } from "@/lib/prisma";
 
-export default function ProductInfo({
+export default async function ProductInfo({
   product,
 }: {
   product: Prisma.ProductGetPayload<{
@@ -24,52 +26,58 @@ export default function ProductInfo({
     },
   }>
 }) {
+  const vendors = await prisma.vendor.findMany();
   return (
     <div
       className="
-        flex flex-col items-center bg-red-200 w-fit
+        flex flex-col w-96 p-2
       "
     >
-      <span className="block text-center text-xl">{product.name}</span>
-      <ProductInfoItem
-        infoName="Категория"
-        infoValue={product.category.name}
-      />
-      <ProductInfoItem
-        infoName="Производитель"
-        infoValue={product.vendor.name}
-      />
-      <ProductInfoItem
-        infoName="Цена"
-        infoValue={
-          (product.price/100)
-            .toLocaleString('ru', {style: 'currency', currency: 'RUB'})
-        }
-      />
-      <ProductInfoItem
-        infoName="Скидка"
-        infoValue={
-          product.discount
-          ?`${product.discount}%`
-          : 'нет'
-        }
-      />
-      <ProductInfoItem
-        infoName="Б/У"
-        infoValue={
-          product.used
-          ?'Да'
-          :'Нет'
-        }
-      />
-      <ProductInfoItem
-        infoName="Количество"
-        infoValue={product.amount}
-      />
-      <ProductInfoItem
-        infoName="Продано"
-        infoValue={product.sold}
-      />
+    <span className="block text-center text-xl">{product.name}</span>
+      <div className="border border-zinc-100">
+        <ProductInfoItem
+          infoName="Категория"
+          infoValue={product.category.name}
+        />
+        <ProductInfoItem
+          infoName="Производитель"
+          infoValue={product.vendor.name}
+        />
+        <ProductInfoItem
+          infoName="Цена"
+          infoValue={
+            (product.price/100)
+              .toLocaleString('ru', {style: 'currency', currency: 'RUB'})
+          }
+        />
+        <ProductInfoItem
+          infoName="Скидка"
+          infoValue={
+            product.discount
+            ?`${product.discount}%`
+            : 'Нет'
+          }
+        />
+        <ProductInfoItem
+          infoName="Б/У"
+          infoValue={
+            product.used
+            ?'Да'
+            :'Нет'
+          }
+        />
+        <ProductInfoItem
+          infoName="Количество"
+          infoValue={product.amount}
+        />
+        <ProductInfoItem
+          infoName="Продано"
+          infoValue={product.sold}
+        />
+      </div>
+      <div className="flex justify-around my-2">
+        <EditProductButtonWithModal product={product} vendors={vendors}/>
+      </div>
     </div>
   );
 }
