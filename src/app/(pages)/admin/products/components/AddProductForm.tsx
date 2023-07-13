@@ -55,6 +55,7 @@ export default function AddProductForm({
               border-2 rounded p-1 focus:border-violet-400
               outline-none
             "
+            placeholder="Сталин 3000"
           />
           <span className="text-red-500 h-2">
             {name.error}
