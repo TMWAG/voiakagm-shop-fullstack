@@ -29,7 +29,7 @@ export default function AddProductButtonWithModal({
   });
   const [discount, setDiscount] = useState<IValidateableTextInput>({
     error: '',
-    valid: false,
+    valid: true,
     value: '',
   });
   const [description, setDescription] = useState<IValidateableTextInput>({
@@ -164,11 +164,11 @@ export default function AddProductButtonWithModal({
           method: 'POST',
           body: JSON.stringify({
             name: name.value,
-            vendorId: Number(vendor),
+            vendorId: Number(vendor.value),
             categoryId: Number(categoryId),
             price: Number(price.value),
             discount: discount.value
-              ? discount.value
+              ? Number(discount.value)
               : undefined,
             description: description.value,
             amount: Number(amount.value),
@@ -176,7 +176,40 @@ export default function AddProductButtonWithModal({
           }),
         }
       );
-      console.log (res);
+      if (!res.ok) throw new Error(await res.text());
+      setAmount({
+        error: '',
+        valid: false,
+        value: '',
+      });
+      setDescription({
+        error: '',
+        valid: false,
+        value: '',
+      });
+      setDiscount({
+        error: '',
+        valid: false,
+        value: '',
+      });
+      setName({
+        error: '',
+        valid: false,
+        value: '',
+      });
+      setPrice({
+        error: '',
+        valid: false,
+        value: '',
+      });
+      setVendor({
+        error: '',
+        valid: false,
+        value: '----',
+      });
+      setUsed(false);
+      setHidden(true);
+      router.refresh();
     } catch (error: any) {
       console.log(error.message);
     }
