@@ -65,10 +65,9 @@ export const UpdateProductSchema = z.object({
     .int(),
   discount: z
     .number()
-    .positive()
     .int()
     .optional()
-    .refine((d) => d === undefined || d < 100),
+    .refine((d) => d === undefined || d < 100 || d > -1),
   description: z
     .string(),
   amount: z
