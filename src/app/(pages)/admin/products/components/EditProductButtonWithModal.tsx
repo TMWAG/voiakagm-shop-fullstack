@@ -5,7 +5,7 @@ import Modal from "../../components/Modal";
 import EditProductButton from "./EditProductButton";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import AddProductForm from "./AddProductForm";
+import ProductForm from "./ProductForm";
 import { IValidateableTextInput } from "@/lib/types";
 
 export default function EditProductButtonWithModal({
@@ -194,35 +194,50 @@ export default function EditProductButtonWithModal({
         }
       );
       if (!res.ok) throw new Error(await res.text());
+      const {data} = await res.json() as {
+        status: 'success',
+        data: {
+          amount: number;
+          categoryId: number;
+          description: string;
+          discount: number;
+          id: number;
+          name: string;
+          price: number;
+          sold: number;
+          used: boolean;
+          vendorId: number;
+        }
+      };
       setAmount({
         error: '',
-        valid: false,
-        value: '',
+        valid: true,
+        value: data.amount,
       });
       setDescription({
         error: '',
-        valid: false,
-        value: '',
+        valid: true,
+        value: data.description,
       });
       setDiscount({
         error: '',
-        valid: false,
-        value: '',
+        valid: true,
+        value: data.discount,
       });
       setName({
         error: '',
-        valid: false,
-        value: '',
+        valid: true,
+        value: data.name,
       });
       setPrice({
         error: '',
-        valid: false,
-        value: '',
+        valid: true,
+        value: data.price,
       });
       setVendor({
         error: '',
-        valid: false,
-        value: '----',
+        valid: true,
+        value: data.vendorId,
       });
       setUsed(false);
       setHidden(true);
@@ -236,7 +251,7 @@ export default function EditProductButtonWithModal({
     <Modal
       button={<EditProductButton onClick={onButtonClick}/>}
       content={
-        <AddProductForm
+        <ProductForm
           amount={amount}
           description={description}
           discount={discount}
@@ -253,6 +268,7 @@ export default function EditProductButtonWithModal({
           used={used}
           vendor={vendor}
           vendors={vendors}
+          actionName="Изменить"
         />
       }
       hidden={hidden}
