@@ -1,8 +1,8 @@
 import useCheckValidity from "@/hooks/useCheckValidity";
-import { IValidateableTextInput } from "@/lib/types";
+import { type IValidateableTextInput } from "@/lib/types";
 import { Prisma } from "@prisma/client";
 
-export default function AddProductForm({
+export default function ProductForm({
   name,
   onNameChange,
   onVendorChange,
@@ -19,6 +19,7 @@ export default function AddProductForm({
   used,
   onUsedChange,
   onSubmit,
+  actionName,
 }: {
   name: IValidateableTextInput;
   onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,6 +37,7 @@ export default function AddProductForm({
   used: boolean;
   onUsedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  actionName: string;
 }){
   const isValid = useCheckValidity(name, price, discount, description, amount, vendor);
   return (
@@ -147,7 +149,7 @@ export default function AddProductForm({
           onClick={onSubmit}
           disabled={!isValid}
         >
-          Добавить товар
+          {actionName} товар
         </button>
       </div>
       <div className="w-1/2">
