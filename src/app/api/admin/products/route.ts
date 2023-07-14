@@ -37,7 +37,6 @@ export async function PUT(req: NextRequest){
     }
     const body = await req.json() as UpdateProductInput;
     const data = UpdateProductSchema.parse(body);
-    console.log('---------\n', data);
     const product = await prisma.product.update({
       where: { id: body.id },
       data,
