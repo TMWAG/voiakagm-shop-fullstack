@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import Modal from "../../components/Modal";
 import AddProductButton from "./AddProductButton";
-import AddProductForm from "./AddProductForm";
+import ProductForm from "./ProductForm";
 import { IValidateableTextInput } from "@/lib/types";
 
 export default function AddProductButtonWithModal({
@@ -134,7 +134,6 @@ export default function AddProductButtonWithModal({
       valid: true,
       value: e.target.value,
     });
-  
   };
   const onAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (Number.isNaN(Number(e.target.value))) {
@@ -219,7 +218,7 @@ export default function AddProductButtonWithModal({
     <Modal
       button={<AddProductButton onClick={onButtonClick}/>}
       content={
-        <AddProductForm
+        <ProductForm
           name={name}
           onNameChange={onNameChange}
           onVendorChange={onVendorChange}
@@ -236,6 +235,7 @@ export default function AddProductButtonWithModal({
           used={used}
           onUsedChange={onUsedChange}
           onSubmit={onSubmit}
+          actionName="Добавить" 
         />
       }
       hidden={hidden}
