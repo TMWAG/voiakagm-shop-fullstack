@@ -6,7 +6,7 @@ import { Prisma } from "@prisma/client";
 
 const inter = Inter({
   subsets: ['cyrillic', 'latin'],
-  weight: ['300', '400'], 
+  weight: ['400'], 
 });
 
 export default function ProductCard({
