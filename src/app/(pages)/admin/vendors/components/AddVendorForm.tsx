@@ -36,6 +36,8 @@ export default function AddVendorForm(){
       if(!res.ok) throw new Error(await res.text());
       router.refresh();
       setHidden(true);
+      setVendorName('');
+      setVendorPicture(undefined);
     } catch (error: any) {
       console.log(error.message);
     }
