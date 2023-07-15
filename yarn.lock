@@ -401,6 +401,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nodemailer@npm:^6.4.8":
+  version: 6.4.8
+  resolution: "@types/nodemailer@npm:6.4.8"
+  dependencies:
+    "@types/node": "*"
+  checksum: 3cc9b6a0e54f25a1b36124df413964ff5a69e8dc4558c5dfc06818917313a50f4dbfe31fc9190e4270d07a0f8678474da24a2eae42f907933ea81d983b4772d4
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -3116,6 +3125,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nodemailer@npm:^6.9.3":
+  version: 6.9.3
+  resolution: "nodemailer@npm:6.9.3"
+  checksum: 3bea8316652c0578515d9146d2f24660e4855807520153f061d39af76b440a4f61b4e70f10fed35f8f12f115f6aea1aeb483ea7ba0337c0e3e675f117c41c611
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^5.0.0":
   version: 5.0.0
   resolution: "nopt@npm:5.0.0"
@@ -4427,6 +4443,7 @@ __metadata:
     "@prisma/client": ^4.16.1
     "@types/bcrypt": ^5.0.0
     "@types/node": 20.2.5
+    "@types/nodemailer": ^6.4.8
     "@types/react": 18.2.9
     "@types/react-dom": 18.2.4
     autoprefixer: 10.4.14
@@ -4437,6 +4454,7 @@ __metadata:
     eslint-config-next: 13.4.4
     jose: ^4.14.4
     next: 13.4.4
+    nodemailer: ^6.9.3
     postcss: 8.4.24
     prisma: ^4.16.1
     react: 18.2.0
