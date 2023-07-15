@@ -1,4 +1,5 @@
 import { getErrorResponse } from "@/lib/helpers";
+import { Mailer } from "@/lib/mailer";
 import { prisma } from "@/lib/prisma";
 import { RegisterUserInput, RegisterUserSchema } from "@/lib/validations/user.schema";
 import { hash } from "bcrypt";
@@ -8,7 +9,6 @@ import { ZodError } from "zod";
 export async function POST (req: NextRequest){
   try {
     const body = (await req.json()) as RegisterUserInput;
-    console.log(body);
     const data = RegisterUserSchema.parse(body);
     const hashedPassword = await hash(data.password, 12);
     const user = await prisma.user.create({
@@ -20,6 +20,7 @@ export async function POST (req: NextRequest){
         password: hashedPassword,
       },
     });
+    await new Mailer().sendConfirmationEmail(user.name, user.email, user.token);
     return new NextResponse(
       JSON.stringify({
         status: 'success',
