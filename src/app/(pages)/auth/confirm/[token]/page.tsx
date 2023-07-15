@@ -18,9 +18,15 @@ export default async function ConfirmEmailPage({
     });
   }
   return (
-    <div>
-        {user &&
-          <span>success</span>
+    <div
+      className="
+        my-40 w-2/3 flex justify-center
+        text-2xl
+      "
+    >
+        {user
+        ?<span>Успешная активация аккаунта</span>
+        :<span>Активация аккаунта не удалась</span>
         }
     </div>
   );
