@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-type EnvVariableKey = 'NEXT_PUBLIC_PICTURES_URL' | 'NEXT_PUBLIC_API_URL' | 'JWT_SECRET_KEY' | 'JWT_EXPIRES_IN';
+type EnvVariableKey = 
+  'NEXT_PUBLIC_PICTURES_URL' | 'NEXT_PUBLIC_API_URL' |
+  'JWT_SECRET_KEY' | 'JWT_EXPIRES_IN' | 'EMAIL_HOST' |
+  'EMAIL_USER' | 'EMAIL_PASS' | 'HOST_URL';
 
 export function getEnvVariable(key: EnvVariableKey): string {
   const value = process.env[key];
