@@ -38,5 +38,6 @@
     "@types/bcrypt": "^5.0.0",
     "dotenv-cli": "^7.2.1",
     "prisma": "^4.16.1"
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }
