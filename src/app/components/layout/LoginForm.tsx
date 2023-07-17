@@ -5,6 +5,7 @@ import useCheckValidity from "@/hooks/useCheckValidity";
 import { IValidateableTextInput } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import RequestRestoreModal from "./RequestRestoreModal";
 
 export default function LoginForm({ hidden }: { hidden?: boolean }) {
   const router = useRouter();
@@ -89,11 +90,18 @@ export default function LoginForm({ hidden }: { hidden?: boolean }) {
       </button>
       <button
         onClick={onSubmit}
-        className="p-1 border-violet-500 border-2 rounded-sm w-48 active:bg-violet-500 active:text-white disabled:active:text-black disabled:border-zinc-600 disabled:cursor-not-allowed disabled:bg-zinc-400"
+        className="
+          p-1 border-violet-500 border-2
+          rounded-sm w-48 active:bg-violet-500
+          active:text-white disabled:active:text-black
+          disabled:border-zinc-600
+          disabled:cursor-not-allowed disabled:bg-zinc-400
+        "
         disabled={!isValid}
       >
         Войти
       </button>
+      <RequestRestoreModal/>
     </div>
   );
 }
