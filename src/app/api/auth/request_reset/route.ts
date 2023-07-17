@@ -23,9 +23,6 @@ export async function POST(req: NextRequest){
     if (error instanceof ZodError) {
       return getErrorResponse(400, 'проверка данных не удалась', error);
     }
-    if (error.code === 'P2002') {
-      return getErrorResponse(409, 'пользователь с таким Email уже зарегистрирован');
-    }
     return getErrorResponse(500, error.message);    
   }
 }
