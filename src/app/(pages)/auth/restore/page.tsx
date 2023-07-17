@@ -2,12 +2,12 @@
 
 import useCheckValidity from "@/hooks/useCheckValidity";
 import { IValidateableTextInput } from "@/lib/types";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function RestorePage(){
   const query = useSearchParams();
-  
+  const router = useRouter();
   const [newPassword, setNewPassword] = useState<IValidateableTextInput>({
     error: '',
     valid: false,
@@ -51,7 +51,7 @@ export default function RestorePage(){
   
   const isValid = useCheckValidity(newPassword, newPasswordConfirmation);
 
-  const onSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onResetSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     try {
       const res = await fetch(
@@ -68,7 +68,7 @@ export default function RestorePage(){
       if (!res.ok) {
         throw new Error(await res.text());
       }
-      redirect('/');
+      router.push('/');
     } catch (error: any) {
       console.log(error.message);
     }
@@ -121,7 +121,7 @@ export default function RestorePage(){
         </button>
         <button
           disabled={!isValid}
-          onClick={onSubmit}
+          onClick={onResetSubmit}
           className="
             p-1 rounded-sm w-48 my-3 mx-auto
             border-violet-500 border-2
