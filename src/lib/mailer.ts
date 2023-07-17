@@ -31,4 +31,26 @@ export class Mailer {
       `,
     });
   }
+
+  async sendRestorationEmail(
+    name: string,
+    email: string,
+    token: string
+  ) {
+    await this.transporter.sendMail({
+      from: getEnvVariable('EMAIL_USER'),
+      to: email,
+      subject: 'Восстановление пароля',
+      html: `
+        <h1>Привет, ${name},</h1>
+        <p>твоя ссылка для восстановления пароля:</p>
+        <a href="
+          ${new URL(
+            '/auth/restore',
+            getEnvVariable('HOST_URL')
+          )}?${new URLSearchParams({ token })}
+        ">Сбросить пароль</a>
+      `,
+    });
+  }
 }
