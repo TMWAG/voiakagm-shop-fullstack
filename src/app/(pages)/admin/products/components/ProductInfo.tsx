@@ -2,6 +2,7 @@ import { type Prisma } from "@prisma/client";
 import ProductInfoItem from "./ProductInfoItem";
 import EditProductButtonWithModal from "./EditProductButtonWithModal";
 import { prisma } from "@/lib/prisma";
+import DeleteProductButtonWithModal from "./DeleteProductButtonWithModal";
 
 export default async function ProductInfo({
   product,
@@ -30,7 +31,7 @@ export default async function ProductInfo({
   return (
     <div
       className="
-        flex flex-col w-96 p-2
+        flex flex-col w-1/3 p-2
       "
     >
     <span className="block text-center text-xl">{product.name}</span>
@@ -77,6 +78,7 @@ export default async function ProductInfo({
       </div>
       <div className="flex justify-around my-2">
         <EditProductButtonWithModal product={product} vendors={vendors}/>
+        <DeleteProductButtonWithModal productName={product.name} productId={product.id}/>
       </div>
     </div>
   );
