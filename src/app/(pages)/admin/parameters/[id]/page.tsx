@@ -19,7 +19,7 @@ export default async function ParameterAdminPage({
   return (
     <div
       className="
-        grid grid-flow-col-dense grid-cols-7 gap-2 my-2
+        grid grid-cols-6 gap-2 my-2
       "
     >
       <AddParameterForm categoryId={params.id} />
