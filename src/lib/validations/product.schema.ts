@@ -85,8 +85,6 @@ export const DeleteProductSchema = z.object({
     .number()
     .positive()
     .int(),
-  confirmation: z
-    .string(),
 });
 
 export type DeleteProductInput = z.infer<typeof DeleteProductSchema>;
