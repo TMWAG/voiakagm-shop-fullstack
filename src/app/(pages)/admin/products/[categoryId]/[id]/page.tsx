@@ -29,8 +29,7 @@ export default async function AdminProductPage({
   return (
     <div
       className="
-        border mt-2 bg-white rounded-sm
-        grid grid-flow-col grid-rows-3
+        border mt-2 bg-white rounded-sm grid
       "
     >
       <ProductInfo product={product}/>
