@@ -21,12 +21,8 @@ export default async function ProductInfo({
 }) {
   const vendors = await prisma.vendor.findMany();
   return (
-    <div
-      className="
-        flex flex-col p-2
-      "
-    >
-    <span className="block text-center text-xl">{product.name}</span>
+    <div className="flex flex-col">
+    <span className="block text-center text-lg">{product.name}</span>
       <div className="border border-zinc-100">
         <ProductInfoItem
           infoName="Категория"
@@ -66,6 +62,10 @@ export default async function ProductInfo({
         <ProductInfoItem
           infoName="Продано"
           infoValue={product.sold}
+        />
+        <ProductInfoItem
+          infoName="Описание"
+          infoValue={product.description}
         />
       </div>
       <div className="flex justify-around my-2">
