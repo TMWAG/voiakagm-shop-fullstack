@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import ProductInfo from "../../components/ProductInfo";
+import ProductCharacteristics from "./components/ProductCharacteristics";
 
 export default async function AdminProductPage({
   params,
@@ -25,6 +26,7 @@ export default async function AdminProductPage({
       "
     >
       <ProductInfo product={product}/>
+      <ProductCharacteristics productId={product.id} categoryId={product.categoryId}/>
     </div>
   );
 }
