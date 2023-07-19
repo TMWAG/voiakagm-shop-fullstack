@@ -16,14 +16,6 @@ export default async function ProductInfo({
       vendor: {
         select: { name: true },
       },
-      characteristics: {
-        orderBy: { id: "asc" },
-        include: {
-          parameter: {
-            select: { name: true },
-          },
-        },
-      },
     },
   }>
 }) {
@@ -31,7 +23,7 @@ export default async function ProductInfo({
   return (
     <div
       className="
-        flex flex-col w-1/3 p-2
+        flex flex-col p-2
       "
     >
     <span className="block text-center text-xl">{product.name}</span>
