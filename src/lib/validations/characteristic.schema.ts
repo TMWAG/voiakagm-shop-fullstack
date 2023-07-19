@@ -21,10 +21,6 @@ export const UpdateCharacteristicSchema = z.object({
     .number()
     .int()
     .positive(),
-  parameterId: z
-    .number()
-    .int()
-    .positive(),
   value: z
     .string()
     .min(1),
