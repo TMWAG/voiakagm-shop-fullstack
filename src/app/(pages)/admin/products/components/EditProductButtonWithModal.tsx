@@ -22,14 +22,6 @@ export default function EditProductButtonWithModal({
       vendor: {
         select: { name: true },
       },
-      characteristics: {
-        orderBy: { id: "asc" },
-        include: {
-          parameter: {
-            select: { name: true },
-          },
-        },
-      },
     },
   }>
 }){
