@@ -16,20 +16,12 @@ export default async function AdminProductPage({
       vendor: {
         select: { name: true },
       },
-      characteristics: {
-        orderBy: { id: "asc" },
-        include: { 
-          parameter: { 
-            select: { name: true },
-          },
-        },
-      },
     },
   });
   return (
     <div
       className="
-        border mt-2 bg-white rounded-sm grid
+        border mt-2 bg-white rounded-sm grid grid-cols-3
       "
     >
       <ProductInfo product={product}/>
