@@ -22,7 +22,7 @@ export default async function AdminProductPage({
   return (
     <div
       className="
-        border mt-2 bg-white rounded-sm grid grid-cols-3
+        border mt-2 bg-white rounded-sm grid grid-cols-[1fr,1fr] gap-1 p-1
       "
     >
       <ProductInfo product={product}/>
