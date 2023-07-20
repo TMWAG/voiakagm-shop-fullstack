@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import AddCharacteristicButtonWithModal from "./AddCharacteristicButtonWithModal";
 import EditCharacteristicButtonWithModal from "./EditCharacteristicButtonWithModal";
+import DeleteCharacteristicButton from "./DeleteCharacteristicButton";
 
 export default async function ProductCharacteristics({
   productId,
@@ -30,7 +31,7 @@ export default async function ProductCharacteristics({
               initialValue={c.value}
               parameterName={c.parameter.name}
             />
-            <button>del</button>
+            <DeleteCharacteristicButton characteristicId={c.id}/>
           </div>
         ))
         : <span>Характеристики не заданы</span>
